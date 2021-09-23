@@ -1,0 +1,22 @@
+{
+  "app": {
+    "development": {
+      "MICRO_SAMPLE": "//localhost:9000"
+    },
+    "production": {
+      "MICRO_SAMPLE": "/micro-sample/"
+    }
+  },
+  "api": {
+
+  },
+  "custom": {
+    "activeRule": [],
+    "systemName": "micro-sample",
+    "copyright": "jinghaihan",
+    "menuLayout": "nav",
+    "menuTheme": "light",
+    "keepAlive": false,
+    "hasLogin": false
+  }
+}
