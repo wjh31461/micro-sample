@@ -1,25 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import NProgress from 'nprogress'
-// import 'nprogress/nprogress.css'
 
 Vue.use(Router)
 
 function createRouter () {
   return new Router({
     mode: 'history',
-    base: process.env.BASE_URL
+    base: window.__POWERED_BY_QIANKUN__ ? '/micro-sample/' : process.env.BASE_URL
   })
 }
+let router = null
 
-const router = createRouter()
+function initRouter () {
+  router = createRouter()
+}
 
-// router.beforeEach((to, from, next) => {
-//   NProgress.start()
-// })
-
-// router.afterEach(() => {
-//   NProgress.done()
-// })
-
-export default router
+export { initRouter }
