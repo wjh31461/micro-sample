@@ -1,6 +1,5 @@
 <template>
-  <!-- 单独启动时，渲染完整的layout -->
-  <a-layout class="layout-container" v-if="!isMicro">
+  <a-layout class="layout-container">
     <!-- 布局顶部 -->
     <a-layout-header class="layout-header">
       <layout-header></layout-header>
@@ -31,11 +30,6 @@
       </a-layout>
     </a-layout>
   </a-layout>
-  <!-- 微前端模式下只渲染内容部分 -->
-  <div v-else>
-    微应用内容部分
-    <slot></slot>
-  </div>
 </template>
 
 <script>
@@ -52,8 +46,8 @@ export default {
       theme: window.custom.menuTheme,
       copyright: window.custom.copyright,
       collapsed: false,
-      fullScreen: true,
-      isMicro: window.__POWERED_BY_QIANKUN__
+      fullScreen: true
+      
     }
   },
   created () {

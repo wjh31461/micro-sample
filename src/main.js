@@ -17,13 +17,10 @@ let instance = null
 let router = null
 function render (props) {
   router = initRouter()
+
   if (props) {
     // 注入 actions 实例
     actions.setActions(props)
-  }
-  // 如果不存在登录页面，直接加载页面
-  if (!window.customElements.hasLogin) {
-    store.dispatch('user/Navigation')
   }
   instance = new Vue({
     store,

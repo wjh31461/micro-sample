@@ -5,16 +5,17 @@
       <TAB></TAB>
     </div>
     <div class="app-container">
-      <slot></slot>
+      <view-layout></view-layout>
     </div>
   </div>
 </template>
 
 <script>
 import TAB from '@comp/Tab/index.vue'
+import ViewLayout from '@comp/Layout/ViewLayout.vue'
 
 export default {
-  components: { TAB },
+  components: { TAB, ViewLayout },
   data () {
     return {
       theme: window.custom.menuTheme

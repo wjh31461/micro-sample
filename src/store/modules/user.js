@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { USER_NAME, ACCESS_SECURITY, ACCESS_TOKEN, NAVS, MENUS, TABS, ACTIVE_TAB } from '@/store/mutation-types'
-import { handleMenus } from '@/utils/menu.js'
+import { handleMenus, generateRoutes } from '@/utils/menu.js'
+import { generatorRouter } from '@/router/index.js'
 import menu from '@/mock/menu.js' 
 
 const user = {
@@ -56,8 +57,10 @@ const user = {
       
     },
     // 获取菜单
-    Navigation ({ commit, state }) {
+    Navigation ({ commit, state, dispatch }) {
       let data = menu
+      // 自启动时进行动态路由处理
+      dispatch('GenerateRoutes', generateRoutes(data)['micro-sample'])
       let navs = []
       let menus = []
       if (window.custom.menuLayout === 'nav') {
@@ -66,7 +69,7 @@ const user = {
           navs.push({
             title: nav.title,
             icon: nav.icon ? nav.icon : 'table',
-            path: nav.activeRule ? nav.activeRule + nav.target : '',
+            path: nav.activeRule ? '/' + nav.target : '',
             key: index.toString(),
             menus: []
           })
@@ -84,8 +87,10 @@ const user = {
       }
     },
     // 动态路由
-    GenerateRoutes ({ commit }) {
-      
+    GenerateRoutes ({ commit }, data) {
+      generatorRouter(data).then(routes => {
+        commit('SET_ROUTES', routes)
+      })
     }
   }
 }
