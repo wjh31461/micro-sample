@@ -43,7 +43,6 @@ export default {
       this.selectedKeys = [menu.key]
       if (this.$route.fullPath !== menu.path) {
         this.$router.push(menu.path)
-        this.$bus.$emit('onUpdateTab', menu)
       }
     },
     // 菜单栏展开事件

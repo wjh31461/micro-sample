@@ -17,6 +17,6 @@
     "menuLayout": "nav",
     "menuTheme": "light",
     "keepAlive": false,
-    "hasLogin": false
+    "needLogin": false
   }
 }

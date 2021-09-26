@@ -1,9 +1,9 @@
 <template>
   <div class="action-container">
-    <a-icon class="action-icon" type="logout" title="退出登录" v-if="hasLogin"></a-icon>
+    <a-icon class="action-icon" type="logout" title="退出登录" v-if="needLogin"></a-icon>
     <a-icon class="action-icon" type="setting" title="设置"></a-icon>
     <a-icon class="action-icon" type="bell" title="提醒"></a-icon>
-    <a-icon class="action-icon" type="user" title="用户" v-if="hasLogin"></a-icon>
+    <a-icon class="action-icon" type="user" title="用户" v-if="needLogin"></a-icon>
   </div>
 </template>
 
@@ -11,7 +11,7 @@
 export default {
   data () {
     return {
-      hasLogin: window.custom.hasLogin
+      needLogin: window.custom.needLogin
     }
   }
 }

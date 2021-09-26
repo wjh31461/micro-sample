@@ -13,8 +13,7 @@ const user = {
     token: '',
     navs: [],
     menus: [],
-    routes: {},
-    tabs: []
+    routes: {}
   },
   mutations: {
     SET_USER: (state, user) => {
@@ -39,10 +38,6 @@ const user = {
     },
     SET_ROUTES: (state, routes) => {
       state.routes = routes
-    },
-    SET_TABS: (state, tabs) => {
-      Vue.ss.set(TABS, tabs)
-      state.tabs = tabs
     }
   },
   actions: {

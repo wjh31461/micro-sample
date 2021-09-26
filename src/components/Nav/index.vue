@@ -35,7 +35,6 @@ export default {
       // 不存在子菜单/且当前路由地址与导航栏地址不同
       if ((!nav.menus || !nav.menus.length) && (this.$route.fullPath !== nav.path)) {
         this.$router.push(nav.path)
-        this.$bus.$emit('onUpdateTab', nav)
       }
     },
     // 处理导航栏选中状态

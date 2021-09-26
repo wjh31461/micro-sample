@@ -7,27 +7,7 @@ export default {
 
     }
   },
-  computed: {
-    listenTabs () {
-      return this.$store.state.user.tabs
-    }
-  },
   watch: {
-    listenTabs: {
-      deep: true,
-      immediate: true,
-      handler: function (tabs) {
-        this.tabs = _.cloneDeep(tabs)
-        // 计算activeTab
-        if (!this.activeTab) {
-          let tab = this.tabs.filter(tab => tab.path === this.$route.fullPath)[0]
-          if (tab) {
-            this.activeTab = tab.path
-            this.handleCloseOther(this.activeTab)
-          }
-        }
-      }
-    },
     $route: {
       deep: true,
       immediate: true,
@@ -39,15 +19,6 @@ export default {
       }
     }
   },
-  mounted () {
-    let self = this
-    self.$bus.$on('onUpdateTab', function (data) {
-      self.handleUpdate(data)
-    })
-  },
-  beforeDestroy () {
-    this.$bus.$off('onUpdateTab')
-  },
   methods: {
     // 由导航栏/菜单导致的tab更新
     handleUpdate (data) {
@@ -58,7 +29,6 @@ export default {
         })
       }
       this.activeTab = data.path
-      this.$store.commit('user/SET_TABS', this.tabs)
     },
     // 点击tab页的路由跳转
     handleChange (path) {
@@ -129,7 +99,6 @@ export default {
         this.activeTab = this.tabs[this.tabs.length - 1].path
         this.handleChange(this.activeTab)
       }
-      this.$store.commit('user/SET_TABS', this.tabs)
     }
   },
   render () {
