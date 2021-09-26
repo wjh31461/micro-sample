@@ -4,9 +4,9 @@
 
 <script>
 export default {
-  name: 'menu2',
+  name: 'error',
   created () {
-    console.log('404 created')
+    // console.log('404 created')
   }
 }
 </script>
