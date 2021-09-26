@@ -1,3 +1,4 @@
+import config from '@/../package.json'
 import Vue from 'vue'
 import Router from 'vue-router'
 import { AppLayout, ViewLayout } from '@/components/Layout'
@@ -7,7 +8,7 @@ Vue.use(Router)
 function createRouter () {
   return new Router({
     mode: 'history',
-    base: window.__POWERED_BY_QIANKUN__ ? '/micro-sample' : process.env.BASE_URL
+    base: window.__POWERED_BY_QIANKUN__ ? '/' + config.name : process.env.BASE_URL
   })
 }
 let router = null
@@ -17,39 +18,39 @@ function initRouter () {
   
   return router
 }
+// routerConfig对象
+let routes = {
+  path: '/',
+  name: '',
+  meta: { title: '' },
+  // 在微前端模式下采用ViewLayout自启动模式下采用完整的AppLayout
+  component: window.__POWERED_BY_QIANKUN__ ? ViewLayout : AppLayout,
+  children: []
+}
+
 // 动态路由表
 const routerMap = {
-  'home': () => import(/* webpackChunkName: "home" */ '@/views/home/home.vue')
+  'home': () => import('@/views/home/home.vue')
 }
 // 动态路由处理
 function generatorRouter (data) {
   return new Promise((resolve, reject) => {
-    let routes = [
-      {
-        path: '/',
-        name: '',
-        meta: {
-          title: ''
-        },
-        component: window.__POWERED_BY_QIANKUN__ ? ViewLayout : AppLayout,
-        children: []
-      }
-    ]
     data.forEach(route => {
       const currentRoute = {
         // 路由路径，target地址
         path: '/' + route.target,
         // 路由名称
-        name: route.title,
+        name: route.target,
         // 该组件对应的路由组件
         component: routerMap[route.target],
         meta: {
           title: route.title
         }
       }
-      routes[0].children.push(currentRoute)
-      routes[0].redirect = routes[0].children[0].path
+      routes.children.push(currentRoute)
     })
+    // 设置动态路由重定向路径
+    routes.redirect = routes.children[0].path
     resolve(routes)
   })
 }

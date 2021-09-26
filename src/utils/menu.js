@@ -49,3 +49,9 @@ export function generateOpenKeys (key) {
   }
   return openKeys
 }
+// 过滤当前系统的菜单
+export function filterMenus (data, activeRule) {
+  // console.log(data, activeRule)
+  // let menus = []
+  return data
+}

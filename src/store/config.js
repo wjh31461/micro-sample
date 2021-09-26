@@ -5,7 +5,7 @@ export default {
     token: '',
     navs: [],
     menus: [],
-    routes: [],
+    routes: {},
     tabs: []
   }
 }

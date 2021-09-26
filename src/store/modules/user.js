@@ -1,6 +1,7 @@
+import config from '@/../package.json'
 import Vue from 'vue'
-import { USER_NAME, ACCESS_SECURITY, ACCESS_TOKEN, NAVS, MENUS, TABS, ACTIVE_TAB } from '@/store/mutation-types'
-import { handleMenus, generateRoutes } from '@/utils/menu.js'
+import { USER_NAME, ACCESS_SECURITY, ACCESS_TOKEN, NAVS, MENUS, TABS } from '@/store/mutation-types'
+import { handleMenus, generateRoutes, filterMenus } from '@/utils/menu.js'
 import { generatorRouter } from '@/router/index.js'
 import menu from '@/mock/menu.js' 
 
@@ -12,7 +13,7 @@ const user = {
     token: '',
     navs: [],
     menus: [],
-    routes: [],
+    routes: {},
     tabs: []
   },
   mutations: {
@@ -58,9 +59,10 @@ const user = {
     },
     // 获取菜单
     Navigation ({ commit, state, dispatch }) {
-      let data = menu
+      // 过滤属于该微应用的菜单
+      let data = filterMenus(menu, '/' + config.name + '/')
       // 自启动时进行动态路由处理
-      dispatch('GenerateRoutes', generateRoutes(data)['micro-sample'])
+      dispatch('GenerateRoutes', generateRoutes(data)[config.name])
       let navs = []
       let menus = []
       if (window.custom.menuLayout === 'nav') {

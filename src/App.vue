@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import config from '@/../package.json'
 import actions from '@/micro/actions'
 
 export default {
@@ -13,7 +14,7 @@ export default {
     return {
       // 是否完成路由渲染
       flag: false,
-      isMicro: window.__POWERED_BY_QIANKUN__
+      appName: config.name
     }
   },
   computed: {
@@ -26,26 +27,26 @@ export default {
       deep: true,
       immediate: true,
       handler: function (routes) {
-        // 添加动态路由信息
-        routes.forEach(route => {
-          this.$router.addRoute(route)
-        })
+        if (Object.keys(routes).length) {
+          // 添加动态路由信息
+          this.$router.addRoute(routes)
+        }
       }
     }
   },
   created () {
     let self = this
+
     actions.onGlobalStateChange(state => {
-      console.log(self.flag)
       if (!self.flag) {
         // 获取当前微应用应生成的路由
-        let routes = state.routes['micro-sample']
+        let routes = state.routes[self.appName]
         // 整理动态路由
         self.$store.dispatch('user/GenerateRoutes', routes)
         self.flag = true
       }
       // 获取当前微应用应该进行缓存的tab页
-      // let keepAlive = state.loadedApps['micro-sample'].route
+      // let keepAlive = state.loadedApps[self.appName].route
     })
   }
 }

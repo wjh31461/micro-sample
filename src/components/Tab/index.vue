@@ -27,6 +27,16 @@ export default {
           }
         }
       }
+    },
+    $route: {
+      deep: true,
+      immediate: true,
+      handler: function (route) {
+        this.handleUpdate({
+          title: route.meta.title,
+          path: route.fullPath
+        })
+      }
     }
   },
   mounted () {
