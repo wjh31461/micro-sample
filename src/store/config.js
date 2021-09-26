@@ -6,5 +6,8 @@ export default {
     navs: [],
     menus: [],
     routes: {}
+  },
+  micro: {
+    keepAlive: []
   }
 }

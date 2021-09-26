@@ -1,14 +1,12 @@
 <template>
-  <div>
-    首页
-  </div>
+  <div>404</div>
 </template>
 
 <script>
 export default {
-  name: 'home',
+  name: 'menu2',
   created () {
-    console.log('home created')
+    console.log('404 created')
   }
 }
 </script>

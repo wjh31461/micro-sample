@@ -46,7 +46,11 @@ export default {
         self.flag = true
       }
       // 获取当前微应用应该进行缓存的tab页
-      // let keepAlive = state.loadedApps[self.appName].route
+      let app = state.loadedApps[self.appName]
+      if (app) {
+        let keepAlive = app.routes
+        self.$store.commit('micro/SET_KEEPALIVE', keepAlive)
+      }
     })
   }
 }
