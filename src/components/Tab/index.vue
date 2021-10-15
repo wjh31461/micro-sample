@@ -4,7 +4,6 @@ export default {
     return {
       activeTab: null,
       tabs: []
-
     }
   },
   watch: {

@@ -1,6 +1,6 @@
 import config from '@/../package.json'
 import Vue from 'vue'
-import { USER_NAME, ACCESS_SECURITY, ACCESS_TOKEN, NAVS, MENUS, TABS } from '@/store/mutation-types'
+import { USER_NAME, ACCESS_SECURITY, ACCESS_TOKEN, NAVS, MENUS } from '@/store/mutation-types'
 import { handleMenus, generateRoutes, filterMenus } from '@/utils/menu.js'
 import { generatorRouter } from '@/router/index.js'
 import menu from '@/mock/menu.js' 

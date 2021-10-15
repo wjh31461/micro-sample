@@ -1,6 +1,7 @@
 import config from '@/../package.json'
 import Vue from 'vue'
 import Router from 'vue-router'
+import defaultRoutes from './routes'
 import { AppLayout, ViewLayout } from '@/components/Layout'
 
 Vue.use(Router)
@@ -8,7 +9,8 @@ Vue.use(Router)
 function createRouter () {
   return new Router({
     mode: 'history',
-    base: window.__POWERED_BY_QIANKUN__ ? '/' + config.name : process.env.BASE_URL
+    base: window.__POWERED_BY_QIANKUN__ ? '/' + config.name : process.env.BASE_URL,
+    routes: defaultRoutes
   })
 }
 let router = null
