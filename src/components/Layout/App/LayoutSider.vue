@@ -19,6 +19,5 @@ export default {
 <style lang="less" scoped>
   .sider-container{
     max-height: 100%;
-    overflow-y: auto;
   }
 </style>
