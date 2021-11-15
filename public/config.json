@@ -1,10 +1,12 @@
 {
   "app": {
     "development": {
-      "MICRO_SAMPLE": "//localhost:9000"
+      "MICRO_SAMPLE": "//localhost:9000",
+      "MICRO_WIDGETS": "//localhost:10000"
     },
     "production": {
-      "MICRO_SAMPLE": "/micro-sample/"
+      "MICRO_SAMPLE": "/micro-sample/",
+      "MICRO_WIDGETS": "/micro-widgets/"
     }
   },
   "api": {
