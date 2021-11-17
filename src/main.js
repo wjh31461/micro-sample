@@ -10,6 +10,8 @@ import { initRouter } from './router/index'
 import '@/styles/global.less'
 // 微前端
 import actions from '@/micro/actions'
+// 获取webpack配置信息
+import config from '@/../package.json'
 
 Vue.config.productionTip = false
 
@@ -34,6 +36,8 @@ function render (props) {
     }
   })
   if (window.__POWERED_BY_QIANKUN__) {
+    // 共享组件
+    sharedComponents()
     const { container } = props
     instance.$mount(container ? container.querySelector('#app') : '#app')
   } else {
@@ -51,6 +55,20 @@ function initRender () {
       router.push('/login')
     }
   }
+}
+
+// 共享组件
+function sharedComponents () {
+  let sharedComponents = {}
+  sharedComponents[config.name] = {}
+  // 获取shared中入口文件注册的所有共享组件
+  let components = require('@/components/shared/index.js')
+  // 遍历注册
+  Object.keys(components).forEach(name => {
+    sharedComponents[config.name][name] = components[name]
+  })
+  sharedComponents = Object.assign(window.sharedComponents, sharedComponents)
+  window.sharedComponents = _.cloneDeep(sharedComponents)
 }
 
 /* eslint-disable */
