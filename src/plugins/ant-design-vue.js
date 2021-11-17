@@ -9,7 +9,9 @@ import {
   Spin,
   Form,
   Input,
-  Button
+  Button,
+  Row,
+  Col
 } from 'ant-design-vue'
 
 Vue.use(Layout)
@@ -21,3 +23,5 @@ Vue.use(Spin)
 Vue.use(Form)
 Vue.use(Input)
 Vue.use(Button)
+Vue.use(Row)
+Vue.use(Col)

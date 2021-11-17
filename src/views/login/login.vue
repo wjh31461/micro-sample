@@ -32,6 +32,29 @@
               <a-icon slot="prefix" type="lock" class="form-prefix" />
             </a-input>
           </a-form-item>
+          <a-form-item>
+            <a-row>
+              <a-col :span="15">
+                <a-input
+                  v-decorator="[
+                    'captcha',
+                    { rules: [{ required: true, message: '请输入验证码' }] },
+                  ]"
+                  size="large"
+                  type="captcha"
+                  placeholder="验证码"
+                >
+                  <a-icon slot="prefix" type="safety-certificate" class="form-prefix" />
+                </a-input>
+              </a-col>
+              <a-col :span="8" :offset="1">
+                <!-- 验证码 -->
+                <div class="captcha" @click="renderCaptcha()">
+                  <canvas id="captcha-canvas"></canvas>
+                </div>
+              </a-col>
+            </a-row>
+          </a-form-item>
         </a-form>
         <a-button class="login-button" type="primary" size="large" @click="handleSubmit">登录</a-button>
       </div>
@@ -48,16 +71,76 @@ export default {
       form: this.$form.createForm(this)
     }
   },
+  mounted () {
+    this.renderCaptcha()
+  },
   methods: {
     handleSubmit () {
       let self = this
       self.form.validateFields((err, values) => {
         if (err) return
-        self.$store.dispatch('user/Navigation').then(() => {
-          // console.log(self.$router.getRoutes())
-          self.$router.push('/')
+        self.$store.dispatch('user/Navigation').then((activeRule) => {
+          self.$router.push(activeRule)
         })
       })
+    },
+    // 渲染验证码
+    renderCaptcha () {
+      // 获取dom元素
+      let captcha = document.getElementById('captcha-canvas')
+      let show = []
+      let width = $(captcha).width()
+      let height = $(captcha).height()
+      let context = captcha.getContext('2d')
+      captcha.width = width
+      captcha.height = height
+      let codes = ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'J', 'K', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+      let length = codes.length
+      // 渲染文字内容
+      for (let i = 0; i < 4; i++) {
+        // 获取到随机的索引值
+        let index = Math.floor(Math.random() * length)
+        // 产生0~30之间的随机弧度
+        let deg = (Math.random() * 30 * Math.PI) / 180
+        // 得到随机内容
+        let txt = codes[index]
+        show[i] = txt.toLowerCase()
+        // 文字在canvas上的x坐标
+        let x = 10 + i * 20
+        // 文字在canvas上的y坐标
+        let y = 20 + Math.random() * 8
+        context.font = 'bold 24px 微软雅黑'
+        context.translate(x, y)
+        context.rotate(deg)
+        context.fillStyle = (() => {
+          let r = Math.floor(Math.random() * 256)
+          let g = Math.floor(Math.random() * 256)
+          let b = Math.floor(Math.random() * 256)
+          return 'rgb(' + r + ',' + g + ',' + b + ')'
+        })()
+        context.fillText(txt, 0, 0)
+        context.rotate(-deg)
+        context.translate(-x, -y)
+      }
+      // 验证码上显示线条
+      for (let i = 0; i < 5; i++) {
+        context.strokeStyle = (() => {
+          let r = Math.floor(Math.random() * 256)
+          let g = Math.floor(Math.random() * 256)
+          let b = Math.floor(Math.random() * 256)
+          return 'rgb(' + r + ',' + g + ',' + b + ')'
+        })()
+        context.beginPath()
+        context.moveTo(
+          Math.random() * width,
+          Math.random() * height
+        )
+        context.lineTo(
+          Math.random() * width,
+          Math.random() * height
+        )
+        context.stroke()
+      }
     }
   }
 }
@@ -72,8 +155,11 @@ export default {
     background: linear-gradient(to right, #243B55, #141E30);
   }
   .login{
-    width: 340px;
-    padding-bottom: 130px;
+    box-sizing: border-box;
+    padding: 20px 40px 60px 40px;
+    background: #fff;
+    width: 420px;
+    border-radius: 4px;
     .title{
       height: 100px;
       display: flex;
@@ -82,9 +168,6 @@ export default {
         height: 50px;
         width: 50px;
         margin: 12px;
-      }
-      .name{
-        color: #fff;
       }
     }
     .form{
@@ -97,6 +180,15 @@ export default {
       .form-prefix{
         font-size: 16px;
         color: rgba(0,0,0,.25)
+      }
+      .captcha{
+        height: 40px;
+        width: 100%;
+        #captcha-canvas{
+          border-radius: 4px;
+          height: 100%;
+          width: 100%;
+        }
       }
     }
   }

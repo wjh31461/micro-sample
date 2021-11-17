@@ -32,8 +32,7 @@ let routes = {
 
 // 动态路由表
 const routerMap = {
-  'home': () => import('@/views/home/home.vue'),
-  '404': () => import('@/views/error/404.vue')
+  'home': () => import('@/views/home/home.vue')
 }
 // 动态路由处理
 export function generatorRouter (data) {
@@ -45,7 +44,7 @@ export function generatorRouter (data) {
         // 路由名称
         name: route.target,
         // 该组件对应的路由组件
-        component: routerMap[route.target] ? routerMap[route.target] : routerMap['404'],
+        component: routerMap[route.target],
         meta: {
           title: route.title
         }
