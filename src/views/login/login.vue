@@ -7,7 +7,7 @@
       </div>
       <div class="form">
         <a-form :form="form" autocomplete="off">
-          <a-form-item hasFeedback>
+          <a-form-item>
             <a-input
               v-decorator="[
                 'username',
@@ -16,21 +16,20 @@
               size="large"
               placeholder="用户名"
             >
-              <a-icon slot="prefix" type="user" class="form-prefix" />
+              <a-icon slot="prefix" type="contacts" class="form-prefix" theme="filled"/>
             </a-input>
           </a-form-item>
-          <a-form-item hasFeedback>
-            <a-input
+          <a-form-item>
+            <a-input-password
               v-decorator="[
                 'password',
                 { rules: [{ required: true, message: '请输入密码' }] },
               ]"
               size="large"
-              type="password"
               placeholder="密码"
             >
-              <a-icon slot="prefix" type="lock" class="form-prefix" />
-            </a-input>
+              <a-icon slot="prefix" type="lock" class="form-prefix" theme="filled"/>
+            </a-input-password>
           </a-form-item>
           <a-form-item>
             <a-row>
@@ -44,7 +43,7 @@
                   type="captcha"
                   placeholder="验证码"
                 >
-                  <a-icon slot="prefix" type="safety-certificate" class="form-prefix" />
+                  <a-icon slot="prefix" type="safety-certificate" class="form-prefix" theme="filled"/>
                 </a-input>
               </a-col>
               <a-col :span="8" :offset="1">
@@ -109,7 +108,7 @@ export default {
         let x = 10 + i * 20
         // 文字在canvas上的y坐标
         let y = 20 + Math.random() * 8
-        context.font = 'bold 24px 微软雅黑'
+        context.font = 'bold 28px 微软雅黑'
         context.translate(x, y)
         context.rotate(deg)
         context.fillStyle = (() => {
@@ -156,9 +155,9 @@ export default {
   }
   .login{
     box-sizing: border-box;
-    padding: 20px 40px 60px 40px;
+    padding: 20px 60px 60px 60px;
     background: #fff;
-    width: 420px;
+    width: 460px;
     border-radius: 4px;
     .title{
       height: 100px;
@@ -175,11 +174,14 @@ export default {
         width: 100%;
       }
       ::v-deep.ant-input-prefix{
-        margin-right: 8px;
+        margin-right: 16px;
+      }
+      ::v-deep.ant-input-affix-wrapper .ant-input:not(:first-child){
+        padding-left: 40px;
       }
       .form-prefix{
-        font-size: 16px;
-        color: rgba(0,0,0,.25)
+        font-size: 20px;
+        color: rgba(0,0,0,.25);
       }
       .captcha{
         height: 40px;

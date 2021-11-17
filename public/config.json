@@ -1,12 +1,10 @@
 {
   "app": {
     "development": {
-      "MICRO_SAMPLE": "//localhost:9000",
-      "MICRO_WIDGETS": "//localhost:10000"
+      "MICRO_SAMPLE": "//localhost:9000"
     },
     "production": {
-      "MICRO_SAMPLE": "/micro-sample/",
-      "MICRO_WIDGETS": "/micro-widgets/"
+      "MICRO_SAMPLE": "/micro-sample/"
     }
   },
   "api": {
@@ -18,6 +16,6 @@
     "copyright": "jinghaihan",
     "menuLayout": "nav",
     "menuTheme": "light",
-    "needLogin": true
+    "loginPage": false
   }
 }
