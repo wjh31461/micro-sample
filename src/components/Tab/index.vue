@@ -182,7 +182,7 @@ export default {
     }
     .tab-card{
       .ant-dropdown-link{
-        padding: 0 16px;
+        padding: 0 24px;
       }
       .close{
         cursor: pointer;

@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   data () {
     return {
@@ -78,8 +80,9 @@ export default {
       let self = this
       self.form.validateFields((err, values) => {
         if (err) return
-        self.$store.dispatch('user/Navigation').then((activeRule) => {
-          self.$router.push(activeRule)
+        self.$store.dispatch('user/Navigation').then(() => {
+          Vue.ss.set('loggedIn', true)
+          self.$router.push('/')
         })
       })
     },
@@ -108,7 +111,7 @@ export default {
         let x = 10 + i * 20
         // 文字在canvas上的y坐标
         let y = 20 + Math.random() * 8
-        context.font = 'bold 28px 微软雅黑'
+        context.font = 'bold 30px arial'
         context.translate(x, y)
         context.rotate(deg)
         context.fillStyle = (() => {
@@ -154,19 +157,18 @@ export default {
     background: linear-gradient(to right, #243B55, #141E30);
   }
   .login{
-    box-sizing: border-box;
-    padding: 20px 60px 60px 60px;
-    background: #fff;
-    width: 460px;
-    border-radius: 4px;
+    width: 380px;
     .title{
-      height: 100px;
       display: flex;
       align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
       .logo{
         height: 50px;
         width: 50px;
-        margin: 12px;
+      }
+      .name{
+        color: #fff;
       }
     }
     .form{

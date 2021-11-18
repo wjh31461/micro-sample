@@ -2,6 +2,7 @@ import config from '@/../package.json'
 import Vue from 'vue'
 import Router from 'vue-router'
 import defaultRoutes from './routes'
+import { store } from '@/store'
 import { AppLayout, ViewLayout } from '@/components/Layout'
 
 Vue.use(Router)
@@ -17,6 +18,35 @@ let router = null
 // 初始化路由实例
 export function initRouter () {
   router = createRouter()
+
+  if (!window.__POWERED_BY_QIANKUN__) {
+    router.beforeEach((to, from, next) => {
+      // NProgress.start()
+      let loggedIn = Vue.ss.get('loggedIn')
+      if (loggedIn || !window.custom.loginPage) {
+        handleBeforeEach(to, from, next)
+      } else {
+        if (to.name === 'login') {
+          next()
+        } else {
+          next({ path: '/login' })
+        }
+        Vue.ss.set('loggedIn', false)
+      }
+    })
+  }
+
+  function handleBeforeEach (to, from, next) {
+    let getters = store.getters['user/GET_ROUTES']
+    // 判断当前是否已经处理过路由信息
+    if (getters && Object.keys(getters).length > 0) {
+      next()
+      return
+    }
+    // 处理路由信息后进行跳转
+    store.dispatch('user/Navigation')
+    next()
+  }
   
   return router
 }

@@ -11,7 +11,8 @@ import {
   Input,
   Button,
   Row,
-  Col
+  Col,
+  Modal
 } from 'ant-design-vue'
 
 Vue.use(Layout)
@@ -25,3 +26,4 @@ Vue.use(Input)
 Vue.use(Button)
 Vue.use(Row)
 Vue.use(Col)
+Vue.use(Modal)

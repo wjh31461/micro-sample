@@ -1,12 +1,23 @@
 <template>
-  <div @click="onClick">Hello World</div>
+  <div @click="onClick">
+    Hello World
+    <demo-modal v-if="visible" :visible="visible" @close="visible = false"></demo-modal>
+  </div>
 </template>
 
 <script>
+import demoModal from '../Modal/index.vue'
+
 export default {
+  components: { demoModal },
+  data () {
+    return {
+      visible: false
+    }
+  },
   methods: {
     onClick () {
-      console.log('Hello World Mother Fucker')
+      this.visible = true
     }
   }
 }

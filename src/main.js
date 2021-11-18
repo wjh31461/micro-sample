@@ -37,7 +37,7 @@ function render (props) {
   })
   if (window.__POWERED_BY_QIANKUN__) {
     // 共享组件
-    sharedComponents()
+    sharedComponent()
     const { container } = props
     instance.$mount(container ? container.querySelector('#app') : '#app')
   } else {
@@ -50,25 +50,23 @@ function initRender () {
     // 如果不存在登录页面，直接加载页面
     if (!window.custom.loginPage) {
       store.dispatch('user/Navigation')
-    } else {
-      // 如果存在登录页面，则先进入登录页面
-      router.push('/login')
     }
   }
 }
 
 // 共享组件
-function sharedComponents () {
-  let sharedComponents = {}
-  sharedComponents[config.name] = {}
+function sharedComponent () {
+  let systemName = config.name
+  let sharedComponent = {}
+  sharedComponent[systemName] = {}
   // 获取shared中入口文件注册的所有共享组件
   let components = require('@/components/shared/index.js')
   // 遍历注册
   Object.keys(components).forEach(name => {
-    sharedComponents[config.name][name] = components[name]
+    sharedComponent[systemName][name] = components[name]
   })
-  sharedComponents = Object.assign(window.sharedComponents, sharedComponents)
-  window.sharedComponents = _.cloneDeep(sharedComponents)
+  sharedComponent = Object.assign(window.sharedComponent, sharedComponent)
+  window.sharedComponent = _.cloneDeep(sharedComponent)
 }
 
 /* eslint-disable */

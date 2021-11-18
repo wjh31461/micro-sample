@@ -15,6 +15,11 @@ const user = {
     menus: [],
     routes: {}
   },
+  getters: {
+    GET_ROUTES (state) {
+      return state.routes
+    }
+  },
   mutations: {
     SET_USER: (state, user) => {
       Vue.ss.set(USER_NAME, user)
