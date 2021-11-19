@@ -10,8 +10,7 @@ import { initRouter } from './router/index'
 import '@/styles/global.less'
 // 微前端
 import actions from '@/micro/actions'
-// 获取webpack配置信息
-import config from '@/../package.json'
+import { setSharedComponent } from '@/micro/shared'
 
 Vue.config.productionTip = false
 
@@ -52,21 +51,6 @@ function initRender () {
   }
 }
 
-// 共享组件
-function sharedComponent () {
-  let systemName = config.name
-  let sharedComponent = {}
-  sharedComponent[systemName] = {}
-  // 获取shared中入口文件注册的所有共享组件
-  let components = require('@/components/shared/index.js')
-  // 遍历注册
-  Object.keys(components).forEach(name => {
-    sharedComponent[systemName][name] = components[name]
-  })
-  sharedComponent = Object.assign(window.sharedComponent, sharedComponent)
-  window.sharedComponent = _.cloneDeep(sharedComponent)
-}
-
 /* eslint-disable */
 if (window.__POWERED_BY_QIANKUN__) {
   __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__
@@ -83,7 +67,7 @@ if (!window.__POWERED_BY_QIANKUN__) {
 // 通常我们可以在这里做一些全局变量的初始化，比如不会在unmount阶段被销毁的应用级别的缓存等
 export async function bootstrap () {
   // 共享组件
-  sharedComponent()
+  setSharedComponent()
 }
 
 // 应用每次进入都会调用mount方法，通常我们在这里触发应用的渲染方法

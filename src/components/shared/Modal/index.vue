@@ -1,5 +1,7 @@
 <template>
-  <a-modal :visible="visible" @cancel="$emit('close')"></a-modal>
+  <a-modal :visible="visible" @cancel="$emit('close')">
+    sample
+  </a-modal>
 </template>
 
 <script>
@@ -14,5 +16,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+  
 </style>

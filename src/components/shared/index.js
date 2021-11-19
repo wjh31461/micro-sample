@@ -1,3 +1,3 @@
-import HelloWorld from './HelloWorld/index.vue'
+import HelloWorld from './HelloWorld'
 
 export { HelloWorld }
