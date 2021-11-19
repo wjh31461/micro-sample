@@ -36,8 +36,6 @@ function render (props) {
     }
   })
   if (window.__POWERED_BY_QIANKUN__) {
-    // 共享组件
-    sharedComponent()
     const { container } = props
     instance.$mount(container ? container.querySelector('#app') : '#app')
   } else {
@@ -84,7 +82,8 @@ if (!window.__POWERED_BY_QIANKUN__) {
 // 下次微应用重新进入时会直接调用mount钩子，不会再重复触发bootstrap
 // 通常我们可以在这里做一些全局变量的初始化，比如不会在unmount阶段被销毁的应用级别的缓存等
 export async function bootstrap () {
-  
+  // 共享组件
+  sharedComponent()
 }
 
 // 应用每次进入都会调用mount方法，通常我们在这里触发应用的渲染方法
