@@ -6,7 +6,8 @@ module.exports = {
   extends: ['plugin:vue/essential', '@vue/standard'],
   globals: {
     "$": 'readonly',
-    "_": 'readonly'
+    "_": 'readonly',
+    'moment': 'readonly'
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
