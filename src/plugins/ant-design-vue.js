@@ -12,7 +12,8 @@ import {
   Button,
   Row,
   Col,
-  Modal
+  Modal,
+  ConfigProvider
 } from 'ant-design-vue'
 
 Vue.use(Layout)
@@ -27,3 +28,4 @@ Vue.use(Button)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Modal)
+Vue.use(ConfigProvider)
